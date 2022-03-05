@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BlogAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.Data
 {
+    /// <summary>
+    /// <para>Resume: Class responsible for data base Blog context</para>
+    /// <para>Created by: Gustavo Boaz</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Date: 2022-03-05</para>
+    /// </summary>
     public class AppBlogContext : DbContext
     {
         public AppBlogContext(DbContextOptions<AppBlogContext> options) : base(options)
