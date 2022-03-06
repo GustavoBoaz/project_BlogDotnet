@@ -14,7 +14,7 @@ namespace BlogAPI.Models
     [Table("tb_themes")]
     public class ThemeModel
     {
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required][StringLength(20)]

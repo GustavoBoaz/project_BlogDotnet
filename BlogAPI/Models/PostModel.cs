@@ -12,7 +12,7 @@ namespace BlogAPI.Models
     [Table("tb_posts")]
     public class PostModel
     {
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required][StringLength(30)]
