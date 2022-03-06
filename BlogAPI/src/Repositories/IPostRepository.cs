@@ -1,7 +1,9 @@
-using System.Collections.Generic;
-using BlogAPI.Models;
 
-namespace BlogAPI.Repositories
+using System.Collections.Generic;
+using BlogAPI.src.Models;
+using BlogAPI.src.DTOs;
+
+namespace BlogAPI.src.Repositories
 {
     /// <summary>
     /// <para>Resume: Interface responsible for representing CRUD actions posts.</para>
@@ -14,7 +16,7 @@ namespace BlogAPI.Repositories
         PostModel GetPostById(int id);
         List<PostModel> GetPostByTitle(string title);
         void AddPost(PostRegisterDTO post);
-        void UpdatePost(int id, PostUpdateDTO post);
+        void UpdatePost(int id, PostRegisterDTO post);
         void DeletePost(int id);
     }
 }

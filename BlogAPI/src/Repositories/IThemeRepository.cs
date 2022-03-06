@@ -1,8 +1,9 @@
 
 using System.Collections.Generic;
-using BlogAPI.Models;
+using BlogAPI.src.Models;
+using BlogAPI.src.DTOs;
 
-namespace BlogAPI.Repositories
+namespace BlogAPI.src.Repositories
 {
     /// <summary>
     /// <para>Resume: Interface responsible for representing CRUD actions themes.</para>

@@ -1,10 +1,10 @@
 
 using System.Linq;
 using System.Collections.Generic;
-using BlogAPI.Data;
-using BlogAPI.Models;
+using BlogAPI.src.Data;
+using BlogAPI.src.Models;
 
-namespace BlogAPI.Repositories.Implements
+namespace BlogAPI.src.Repositories.Implements
 {
     /// <summary>
     /// <para>Resume: Class responsible for implement methos CRUD Theme.</para>

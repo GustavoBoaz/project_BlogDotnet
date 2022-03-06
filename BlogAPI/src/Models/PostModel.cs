@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogAPI.Models
+namespace BlogAPI.src.Models
 {
     /// <summary>
     /// <para>Resume: Class responsible for representing a posts in the database.</para>

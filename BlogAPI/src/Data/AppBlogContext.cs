@@ -1,7 +1,7 @@
-using BlogAPI.Models;
+using BlogAPI.src.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlogAPI.Data
+namespace BlogAPI.src.Data
 {
     /// <summary>
     /// <para>Resume: Class responsible for data base Blog context</para>

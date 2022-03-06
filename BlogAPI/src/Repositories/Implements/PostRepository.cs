@@ -1,10 +1,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using BlogAPI.Data;
-using BlogAPI.Models;
+using BlogAPI.src.Data;
+using BlogAPI.src.Models;
 
-namespace BlogAPI.Repositories.Implements
+namespace BlogAPI.src.Repositories.Implements
 {
     /// <summary>
     /// <para>Resume: Class responsible for implement methos CRUD Post.</para>
@@ -66,19 +66,6 @@ namespace BlogAPI.Repositories.Implements
         }
 
         /// <summary>
-        /// <para>Resume: method for update existent post.</para>
-        /// </summary>
-        /// <param name="post">PostUpdateDTO</param>
-        /// <param name="id">Id of post</param>
-        public void UpdatePost(int id, PostUpdateDTO post)
-        {
-            var postToUpdate = GetPostById(id);
-            postToUpdate.Title = post.Title;
-            postToUpdate.Description = post.Description;
-            _context.Posts.Update(postToUpdate);
-        }
-
-        /// <summary>
         /// <para>Resume: method for delete existent post.</para>
         /// </summary>
         /// <param name="id">Id of post</param>
@@ -86,7 +73,20 @@ namespace BlogAPI.Repositories.Implements
         {
             _context.Posts.Remove(GetPostById(id));
         }
-        
+
+        /// <summary>
+        /// <para>Resume: method for update existent post.</para>
+        /// </summary>
+        /// <param name="post">PostUpdateDTO</param>
+        /// <param name="id">Id of post</param>
+        public void UpdatePost(int id, PostRegisterDTO post)
+        {
+            var postToUpdate = GetPostById(id);
+            postToUpdate.Title = post.Title;
+            postToUpdate.Description = post.Description;
+            _context.Posts.Update(postToUpdate);
+        }
+
         #endregion IPostRepository implementation
     }
 }

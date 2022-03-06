@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BlogAPI.Migrations
+namespace BlogAPI.src.Migrations
 {
     public partial class Initial : Migration
     {

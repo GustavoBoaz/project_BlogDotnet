@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace BlogAPI.Models
+namespace BlogAPI.src.Models
 {
     /// <summary>
     /// <para>Resume: Class responsible for representing a themes in the database.</para>
