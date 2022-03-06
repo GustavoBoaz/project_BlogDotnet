@@ -42,6 +42,15 @@ namespace BlogAPI.src.Repositories.Implements
         }
 
         /// <summary>
+        /// <para>Resume: method for get all posts.</para>
+        /// </summary>
+        /// <returns>List of PostModel</returns>
+        public List<PostModel> GetAllPosts()
+        {
+            return _context.Posts.ToList();
+        }
+
+        /// <summary>
         /// <para>Resume: method for get posts by title.</para>
         /// </summary>
         /// <param name="title">Title of post</param>

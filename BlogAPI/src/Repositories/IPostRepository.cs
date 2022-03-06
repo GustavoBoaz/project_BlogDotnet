@@ -14,6 +14,7 @@ namespace BlogAPI.src.Repositories
     public interface IPostRepository
     {
         PostModel GetPostById(int id);
+        List<PostModel> GetAllPosts();
         List<PostModel> GetPostByTitle(string title);
         void AddPost(PostRegisterDTO post);
         void UpdatePost(int id, PostRegisterDTO post);
