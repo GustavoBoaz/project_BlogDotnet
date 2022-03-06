@@ -65,7 +65,7 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>List of ThemeModel</returns>
         public List<ThemeModel> GetThemeByDescription(string description)
         {
-            return _context.Themes.Where(x => x.Description.Contains(description)).ToList();
+            return _context.Themes.Where(x => x.Description == description).ToList();
         }
 
         /// <summary>

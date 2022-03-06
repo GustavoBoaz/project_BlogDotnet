@@ -17,8 +17,8 @@ namespace BlogAPI.src.Models
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required][StringLength(20)]
-        public string Description { get; set; }
+        [Column(TypeName = "nvarchar(24)")]
+        public string Description { get ; set; }
 
         [JsonIgnore]
         public List<PostModel> Posts { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogAPI.src.Migrations
 {
     [DbContext(typeof(AppBlogContext))]
-    [Migration("20220306010029_Initial")]
-    partial class Initial
+    [Migration("20220306202602_InitialVI")]
+    partial class InitialVI
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace BlogAPI.src.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BlogAPI.Models.PostModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.PostModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace BlogAPI.src.Migrations
                     b.ToTable("tb_posts");
                 });
 
-            modelBuilder.Entity("BlogAPI.Models.ThemeModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.ThemeModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,16 +61,14 @@ namespace BlogAPI.src.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(24)");
 
                     b.HasKey("Id");
 
                     b.ToTable("tb_themes");
                 });
 
-            modelBuilder.Entity("BlogAPI.Models.UserModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,13 +95,13 @@ namespace BlogAPI.src.Migrations
                     b.ToTable("tb_users");
                 });
 
-            modelBuilder.Entity("BlogAPI.Models.PostModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.PostModel", b =>
                 {
-                    b.HasOne("BlogAPI.Models.ThemeModel", "Theme")
+                    b.HasOne("BlogAPI.src.Models.ThemeModel", "Theme")
                         .WithMany("Posts")
                         .HasForeignKey("ThemeId");
 
-                    b.HasOne("BlogAPI.Models.UserModel", "User")
+                    b.HasOne("BlogAPI.src.Models.UserModel", "User")
                         .WithMany("MyPosts")
                         .HasForeignKey("UserId");
 
@@ -112,12 +110,12 @@ namespace BlogAPI.src.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BlogAPI.Models.ThemeModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.ThemeModel", b =>
                 {
                     b.Navigation("Posts");
                 });
 
-            modelBuilder.Entity("BlogAPI.Models.UserModel", b =>
+            modelBuilder.Entity("BlogAPI.src.Models.UserModel", b =>
                 {
                     b.Navigation("MyPosts");
                 });

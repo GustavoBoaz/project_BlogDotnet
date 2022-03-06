@@ -50,6 +50,8 @@ namespace BlogAPI.src.Services.Implements
                 Email = user.Email,
                 Password = EncodePassword(user.Password)                
             };
+            
+            user.Password = EncodePassword(user.Password);
             _userRepository.AddUser(user);
 
             return userModel;            

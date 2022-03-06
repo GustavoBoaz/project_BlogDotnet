@@ -11,12 +11,12 @@ namespace BlogAPI.src.Data
     /// </summary>
     public class AppBlogContext : DbContext
     {
-        public AppBlogContext(DbContextOptions<AppBlogContext> options) : base(options)
-        {
-        }
-
         public DbSet<UserModel> Users { get; set; }
         public DbSet<ThemeModel> Themes { get; set; }
         public DbSet<PostModel> Posts { get; set; }
+
+        public AppBlogContext(DbContextOptions<AppBlogContext> options) : base(options)
+        {
+        }
     }
 }

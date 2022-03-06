@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 
 namespace BlogAPI.src.Repositories
 {
@@ -10,7 +9,6 @@ namespace BlogAPI.src.Repositories
     /// </summary>
     public class ThemeUpdateDTO
     {
-        [Required][StringLength(20)]
         public string Description { get; set; }
     }
 }
