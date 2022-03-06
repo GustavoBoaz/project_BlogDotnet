@@ -1,8 +1,6 @@
 
 using System;
-using System.Linq;
 using System.Text;
-using BlogAPI.src.Data;
 using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
 using BlogAPI.src.Repositories;
