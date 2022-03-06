@@ -9,12 +9,21 @@ namespace BlogAPI.src.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        #region Attributes
+
         private readonly IUserRepository _userRepository;
 
+        #endregion Attributes
+
+        #region Constructors
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         [HttpPost]
         public IActionResult CreateUser([FromBody] UserRegisterDTO user)
@@ -64,5 +73,7 @@ namespace BlogAPI.src.Controllers
             _userRepository.UpdateUser(id, user);
             return Ok();
         }
+
+        #endregion Methods
     }
 }
