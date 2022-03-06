@@ -39,7 +39,10 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>PostModel</returns>
         public PostModel GetPostById(int id)
         {
-            return _context.Posts.FirstOrDefault(p => p.Id == id);
+            return _context.Posts
+                        .Include(p => p.Theme)
+                        .Include(p => p.User)
+                        .FirstOrDefault(p => p.Id == id);
         }
 
         /// <summary>
@@ -48,7 +51,10 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>List of PostModel</returns>
         public List<PostModel> GetAllPosts()
         {
-            return _context.Posts.Include(p => p.Theme).Include(p => p.User).ToList();
+            return _context.Posts
+                        .Include(p => p.Theme)
+                        .Include(p => p.User)
+                        .ToList();
         }
 
         /// <summary>
@@ -58,13 +64,18 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>List of PostModel</returns>
         public List<PostModel> GetPostByTitle(string title)
         {
-            return _context.Posts.Where(p => p.Title.Contains(title)).ToList();
+            return _context.Posts
+                        .Include(p => p.Theme)
+                        .Include(p => p.User)
+                        .Where(p => p.Title.Contains(title))
+                        .ToList();
         }
 
         /// <summary>
         /// <para>Resume: method for add new post.</para>
         /// </summary>
         /// <param name="post">PostRegisterDTO</param>
+        /// <returns>PostModel</returns>
         public PostModel AddPost(PostRegisterDTO post)
         {
             var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
@@ -98,6 +109,7 @@ namespace BlogAPI.src.Repositories.Implements
         /// </summary>
         /// <param name="post">PostUpdateDTO</param>
         /// <param name="id">Id of post</param>
+        /// <returns>PostModel</returns>
         public PostModel UpdatePost(int id, PostRegisterDTO post)
         {
             var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
@@ -110,6 +122,7 @@ namespace BlogAPI.src.Repositories.Implements
             postToUpdate.Description = post.Description;
             postToUpdate.Theme = existentTheme;
             postToUpdate.User = existentUser;
+            
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();
             return postToUpdate;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BlogAPI.src.Data;
 using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.src.Repositories.Implements
 {
@@ -68,7 +69,9 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>UserModel</returns>
         public UserModel GetUserByEmail(string email)
         {
-            return _context.Users.FirstOrDefault(x => x.Email == email);
+            return _context.Users
+                        .Include(u => u.MyPosts)
+                        .FirstOrDefault(u => u.Email == email);
         }
 
         /// <summary>
@@ -78,7 +81,9 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>UserModel</returns>
         public UserModel GetUserById(int id)
         {
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            return _context.Users
+                        .Include(u => u.MyPosts)
+                        .FirstOrDefault(u => u.Id == id);
         }
 
         /// <summary>
@@ -88,7 +93,10 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>List of UserModel</returns>
         public List<UserModel> GetUserByName(string name)
         {
-            return _context.Users.Where(x => x.Name.Contains(name)).ToList();
+            return _context.Users
+                        .Include(u => u.MyPosts)
+                        .Where(u => u.Name.Contains(name))
+                        .ToList();
         }
 
         /// <summary>

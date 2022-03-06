@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using BlogAPI.src.Data;
 using BlogAPI.src.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAPI.src.Repositories.Implements
 {
@@ -65,7 +66,10 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>List of ThemeModel</returns>
         public List<ThemeModel> GetThemeByDescription(string description)
         {
-            return _context.Themes.Where(x => x.Description.Contains(description)).ToList();
+            return _context.Themes
+                        .Include(t => t.Posts)
+                        .Where(t => t.Description.Contains(description))
+                        .ToList();
         }
 
         /// <summary>
@@ -75,7 +79,9 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>ThemeModel</returns>
         public ThemeModel GetThemeById(int id)
         {
-            return _context.Themes.FirstOrDefault(x => x.Id == id);
+            return _context.Themes
+                        .Include(t => t.Posts)
+                        .FirstOrDefault(t => t.Id == id);
         }
 
         /// <summary>
