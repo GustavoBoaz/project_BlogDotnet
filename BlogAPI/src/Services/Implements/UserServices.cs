@@ -19,16 +19,14 @@ namespace BlogAPI.src.Services.Implements
     {
         #region Attributes
 
-        private readonly AppBlogContext _context;
         private readonly IUserRepository _userRepository;
 
         #endregion Attributes
 
         #region Constructors
 
-        public UserServices(AppBlogContext context, IUserRepository userRepository)
+        public UserServices(IUserRepository userRepository)
         {
-            _context = context;
             _userRepository = userRepository;
         }
 
@@ -44,7 +42,7 @@ namespace BlogAPI.src.Services.Implements
         /// <returns>UserModel</returns>
         public UserModel CreateUserNotDuplicated(UserRegisterDTO user)
         {
-            var userExists = _context.Users.FirstOrDefault(u => u.Email == user.Email);
+            var userExists = _userRepository.GetUserByEmail(user.Email);
 
             if (userExists != null) return null;
 
