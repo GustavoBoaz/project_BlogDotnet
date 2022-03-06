@@ -5,7 +5,7 @@ using BlogAPI.Data;
 using BlogAPI.DTOs;
 using BlogAPI.Models;
 
-namespace BlogAPI.Repositories.implements
+namespace BlogAPI.Repositories.Implements
 {
     /// <summary>
     /// <para>Resume: Class responsible for implement methos CRUD Users.</para>

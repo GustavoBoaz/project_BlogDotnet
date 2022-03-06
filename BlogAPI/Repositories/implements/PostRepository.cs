@@ -4,7 +4,7 @@ using System.Linq;
 using BlogAPI.Data;
 using BlogAPI.Models;
 
-namespace BlogAPI.Repositories.implements
+namespace BlogAPI.Repositories.Implements
 {
     /// <summary>
     /// <para>Resume: Class responsible for implement methos CRUD Post.</para>
