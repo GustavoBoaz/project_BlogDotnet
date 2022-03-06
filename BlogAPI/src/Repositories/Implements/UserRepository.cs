@@ -58,6 +58,7 @@ namespace BlogAPI.src.Repositories.Implements
         public void DeleteUser(int id)
         {
             _context.Users.Remove(GetUserById(id));
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -101,6 +102,7 @@ namespace BlogAPI.src.Repositories.Implements
             userModel.Name = user.Name;
             userModel.Password = user.Password;
             _context.Users.Update(userModel);
+            _context.SaveChanges();
         }
     }
 

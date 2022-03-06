@@ -54,7 +54,8 @@ namespace BlogAPI.src.Repositories.Implements
         /// <param name="id">Id of theme</param>
         public void DeleteTheme(int id)
         {
-            _context.Themes.Remove(GetThemeById(id));   
+            _context.Themes.Remove(GetThemeById(id));
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -86,6 +87,7 @@ namespace BlogAPI.src.Repositories.Implements
             var themeUpdate = GetThemeById(id);
             themeUpdate.Description = theme.Description;
             _context.Themes.Update(themeUpdate);
+            _context.SaveChanges();
         }
 
         #endregion IThemeRepository implementation

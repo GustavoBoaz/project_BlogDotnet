@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using BlogAPI.src.Repositories;
+using BlogAPI.src.Repositories.Implements;
 
 namespace BlogAPI
 {
@@ -21,6 +23,12 @@ namespace BlogAPI
                 .AddJsonFile("appsettings.json")
                 .Build();
             services.AddDbContext<AppBlogContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IThemeRepository, ThemeRepository>();
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +43,7 @@ namespace BlogAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

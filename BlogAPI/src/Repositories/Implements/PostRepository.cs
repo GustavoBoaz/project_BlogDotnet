@@ -72,6 +72,7 @@ namespace BlogAPI.src.Repositories.Implements
         public void DeletePost(int id)
         {
             _context.Posts.Remove(GetPostById(id));
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -85,6 +86,7 @@ namespace BlogAPI.src.Repositories.Implements
             postToUpdate.Title = post.Title;
             postToUpdate.Description = post.Description;
             _context.Posts.Update(postToUpdate);
+            _context.SaveChanges();
         }
 
         #endregion IPostRepository implementation
