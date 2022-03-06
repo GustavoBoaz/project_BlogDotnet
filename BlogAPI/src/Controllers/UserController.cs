@@ -1,6 +1,7 @@
 
 using BlogAPI.src.DTOs;
 using BlogAPI.src.Repositories;
+using BlogAPI.src.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogAPI.src.Controllers
@@ -12,13 +13,15 @@ namespace BlogAPI.src.Controllers
         #region Attributes
 
         private readonly IUserRepository _userRepository;
+        private readonly IUserServices _userServices;
 
         #endregion Attributes
 
         #region Constructors
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IUserServices userServices)
         {
             _userRepository = userRepository;
+            _userServices = userServices;
         }
 
         #endregion Constructors
@@ -29,9 +32,8 @@ namespace BlogAPI.src.Controllers
         public IActionResult CreateUser([FromBody] UserRegisterDTO user)
         {
             if(!ModelState.IsValid) return BadRequest(ModelState);
-
-            _userRepository.AddUser(user);
-            return Created("", user);
+            
+            return _userServices.CreateUserNotDuplicated(user) == null ? Unauthorized() : Created("", user);
         }
 
         [HttpGet("{id}")]

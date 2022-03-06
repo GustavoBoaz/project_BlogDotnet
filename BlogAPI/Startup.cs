@@ -3,12 +3,13 @@ using BlogAPI.src.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using BlogAPI.src.Repositories;
 using BlogAPI.src.Repositories.Implements;
+using BlogAPI.src.Services;
+using BlogAPI.src.Services.Implements;
 
 namespace BlogAPI
 {
@@ -27,6 +28,7 @@ namespace BlogAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IThemeRepository, ThemeRepository>();
+            services.AddScoped<IUserServices, UserServices>();
 
             services.AddControllers();
         }
