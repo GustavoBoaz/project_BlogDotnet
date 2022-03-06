@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogAPI.src.Migrations
 {
     [DbContext(typeof(AppBlogContext))]
-    [Migration("20220306202602_InitialVI")]
-    partial class InitialVI
+    [Migration("20220306204042_InitialVII")]
+    partial class InitialVII
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,9 @@ namespace BlogAPI.src.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(24)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 

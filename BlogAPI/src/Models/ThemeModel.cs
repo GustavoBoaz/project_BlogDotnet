@@ -17,7 +17,7 @@ namespace BlogAPI.src.Models
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column(TypeName = "nvarchar(24)")]
+        [Required][StringLength(30)]
         public string Description { get ; set; }
 
         [JsonIgnore]

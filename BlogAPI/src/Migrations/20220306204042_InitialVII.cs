@@ -2,17 +2,20 @@
 
 namespace BlogAPI.src.Migrations
 {
-    public partial class InitialVI : Migration
+    public partial class InitialVII : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
                 table: "tb_themes",
-                type: "nvarchar(24)",
-                nullable: true,
+                type: "nvarchar(30)",
+                maxLength: 30,
+                nullable: false,
+                defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(24)");
+                oldType: "nvarchar(24)",
+                oldNullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -21,11 +24,10 @@ namespace BlogAPI.src.Migrations
                 name: "Description",
                 table: "tb_themes",
                 type: "nvarchar(24)",
-                nullable: false,
-                defaultValue: "",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(24)",
-                oldNullable: true);
+                oldType: "nvarchar(30)",
+                oldMaxLength: 30);
         }
     }
 }
