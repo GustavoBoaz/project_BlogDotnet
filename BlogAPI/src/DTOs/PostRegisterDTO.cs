@@ -17,7 +17,7 @@ namespace BlogAPI.src.Repositories
         public string Description { get; set; }
 
         [Required][StringLength(30)]
-        public string DescritionTheme { get; set; }
+        public string DescriptionTheme { get; set; }
 
         [Required][StringLength(30)]
         public string EmailUser { get; set; }

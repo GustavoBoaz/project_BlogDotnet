@@ -88,6 +88,7 @@ namespace BlogAPI.src.Repositories.Implements
         /// <para>Resume: Implement method for update a theme.</para>
         /// </summary>
         /// <param name="theme">ThemeUpdateDTO</param>
+        /// <param name="id">Int</param>
         public void UpdateTheme(int id, ThemeUpdateDTO theme)
         {
             var themeUpdate = GetThemeById(id);

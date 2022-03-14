@@ -78,7 +78,7 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>PostModel</returns>
         public PostModel AddPost(PostRegisterDTO post)
         {
-            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
+            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme);
             var existentUser = _context.Users.FirstOrDefault(u => u.Email == post.EmailUser);
 
             if (existentTheme == null || existentUser == null) return null;
@@ -112,7 +112,7 @@ namespace BlogAPI.src.Repositories.Implements
         /// <returns>PostModel</returns>
         public PostModel UpdatePost(int id, PostRegisterDTO post)
         {
-            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
+            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme);
             var existentUser = _context.Users.FirstOrDefault(u => u.Email == post.EmailUser);
             var postToUpdate = GetPostById(id);
 
