@@ -10,16 +10,20 @@ namespace BlogAPI.src.Repositories
     /// </summary>
     public class PostUpdateDTO
     {
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Title { get; set; }
-        
-        [Required][StringLength(100)]
+
+        [Required]
+        [StringLength(100)]
         public string Description { get; set; }
-        
-        [Required][StringLength(30)]
+
+        [Required]
+        [StringLength(30)]
         public string DescritionTheme { get; set; }
 
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string EmailUser { get; set; }
     }
 }

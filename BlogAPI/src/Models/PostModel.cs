@@ -12,13 +12,16 @@ namespace BlogAPI.src.Models
     [Table("tb_posts")]
     public class PostModel
     {
-        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Title { get; set; }
-        
-        [Required][StringLength(100)]
+
+        [Required]
+        [StringLength(100)]
         public string Description { get; set; }
 
         [ForeignKey("ThemeId")]

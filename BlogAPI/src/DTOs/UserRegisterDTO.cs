@@ -10,13 +10,16 @@ namespace BlogAPI.src.DTOs
     /// </summary>
     public class UserRegisterDTO
     {
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Name { get; set; }
 
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Email { get; set; }
 
-        [Required][StringLength(100)]
+        [Required]
+        [StringLength(100)]
         public string Password { get; set; }
     }
 }

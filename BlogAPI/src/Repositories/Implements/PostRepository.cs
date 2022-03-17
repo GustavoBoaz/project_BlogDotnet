@@ -122,7 +122,7 @@ namespace BlogAPI.src.Repositories.Implements
             postToUpdate.Description = post.Description;
             postToUpdate.Theme = existentTheme;
             postToUpdate.User = existentUser;
-            
+
             _context.Posts.Update(postToUpdate);
             _context.SaveChanges();
             return postToUpdate;

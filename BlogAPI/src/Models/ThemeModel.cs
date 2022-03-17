@@ -14,11 +14,13 @@ namespace BlogAPI.src.Models
     [Table("tb_themes")]
     public class ThemeModel
     {
-        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required][StringLength(30)]
-        public string Description { get ; set; }
+        [Required]
+        [StringLength(30)]
+        public string Description { get; set; }
 
         [JsonIgnore]
         public List<PostModel> Posts { get; set; }

@@ -137,7 +137,7 @@ namespace BlogAPI.src.Controllers
             var themeModel = _themeRepository.GetThemeById(id);
             if (themeModel == null) return NotFound();
 
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             _themeRepository.UpdateTheme(id, theme);
             return Ok();

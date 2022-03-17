@@ -14,18 +14,22 @@ namespace BlogAPI.src.Models
     [Table("tb_users")]
     public class UserModel
     {
-        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Name { get; set; }
 
-        [Required][StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string Email { get; set; }
 
-        [Required][StringLength(100)]
+        [Required]
+        [StringLength(100)]
         public string Password { get; set; }
-        
+
         [JsonIgnore]
         public List<PostModel> MyPosts { get; set; }
     }

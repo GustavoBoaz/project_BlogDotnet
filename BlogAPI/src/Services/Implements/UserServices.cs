@@ -48,13 +48,13 @@ namespace BlogAPI.src.Services.Implements
             {
                 Name = user.Name,
                 Email = user.Email,
-                Password = EncodePassword(user.Password)                
+                Password = EncodePassword(user.Password)
             };
-            
+
             user.Password = EncodePassword(user.Password);
             _userRepository.AddUser(user);
 
-            return userModel;            
+            return userModel;
         }
 
         /// <summary>
