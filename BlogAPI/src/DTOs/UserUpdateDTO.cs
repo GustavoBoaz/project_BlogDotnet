@@ -17,5 +17,8 @@ namespace BlogAPI.src.DTOs
         [Required]
         [StringLength(100)]
         public string Password { get; set; }
+
+        [Required]
+        public string Role { get; set; }
     }
 }

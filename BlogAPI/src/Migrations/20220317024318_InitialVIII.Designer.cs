@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogAPI.src.Migrations
 {
     [DbContext(typeof(AppBlogContext))]
-    [Migration("20220306204042_InitialVII")]
-    partial class InitialVII
+    [Migration("20220317024318_InitialVIII")]
+    partial class InitialVIII
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,10 @@ namespace BlogAPI.src.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

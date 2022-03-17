@@ -34,7 +34,6 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Deb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
@@ -60,3 +59,4 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Deb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\BlogAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.xml
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\BlogAPI.xml
+C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

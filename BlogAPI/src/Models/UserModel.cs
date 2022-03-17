@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,6 +30,9 @@ namespace BlogAPI.src.Models
         [Required]
         [StringLength(100)]
         public string Password { get; set; }
+
+        [Required]
+        public string Role { get; set; }
 
         [JsonIgnore]
         public List<PostModel> MyPosts { get; set; }

@@ -48,7 +48,8 @@ namespace BlogAPI.src.Services.Implements
             {
                 Name = user.Name,
                 Email = user.Email,
-                Password = EncodePassword(user.Password)
+                Password = EncodePassword(user.Password),
+                Role = user.Role
             };
 
             user.Password = EncodePassword(user.Password);

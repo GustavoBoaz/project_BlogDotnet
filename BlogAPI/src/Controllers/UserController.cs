@@ -43,8 +43,8 @@ namespace BlogAPI.src.Controllers
         ///     {
         ///        "name": "Gustavo Boaz",
         ///        "email": "gustavo@email.com",
-        ///        "password": "134652"
-        ///        
+        ///        "password": "134652",
+        ///        "role": "admin"
         ///     }
         ///
         /// </remarks>
@@ -129,8 +129,8 @@ namespace BlogAPI.src.Controllers
         ///     PUT /api/user/1
         ///     {
         ///        "name": "Gustavo Boaz",
-        ///        "password": "134652"
-        ///        
+        ///        "password": "134652",
+        ///        "role": "admin"
         ///     }
         ///
         /// </remarks>

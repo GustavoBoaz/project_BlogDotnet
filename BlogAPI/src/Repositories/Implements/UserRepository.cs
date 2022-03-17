@@ -1,4 +1,5 @@
 
+using System.Reflection.Metadata;
 using System.Linq;
 using System.Collections.Generic;
 using BlogAPI.src.Data;
@@ -48,6 +49,7 @@ namespace BlogAPI.src.Repositories.Implements
                 Name = user.Name,
                 Password = user.Password,
                 Email = user.Email,
+                Role = user.Role
             });
             _context.SaveChanges();
         }
@@ -109,6 +111,7 @@ namespace BlogAPI.src.Repositories.Implements
             var userModel = GetUserById(id);
             userModel.Name = user.Name;
             userModel.Password = user.Password;
+            userModel.Role = user.Role;
             _context.Users.Update(userModel);
             _context.SaveChanges();
         }
