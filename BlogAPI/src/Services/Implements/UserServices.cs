@@ -59,6 +59,30 @@ namespace BlogAPI.src.Services.Implements
         }
 
         /// <summary>
+        /// <para>Resume: Method responsible for validate user email and password before authorization</para>
+        /// <para>Description: Method encodes user password and validate email and password before authorization</para>
+        /// </summary>
+        /// <param name="user">UserLoginDTO</param>
+        /// <returns>AuthorizationDTO</returns>
+        public AuthorizationDTO GetAuthorization(UserLoginDTO user)
+        {
+            var userExists = _userRepository.GetUserByEmail(user.Email);
+
+            if (userExists == null) return null;
+
+            if (userExists.Password != EncodePassword(user.Password)) return null;
+
+            return new AuthorizationDTO
+            {
+                Id = userExists.Id,
+                Name = userExists.Name,
+                Email = userExists.Email,
+                Role = userExists.Role,
+                Token = TokenService.GenerateToken(userExists)
+            };
+        }
+
+        /// <summary>
         /// <para>Resume: Method responsible for encode user password</para>
         /// </summary>
         /// <param name="password">string</param>

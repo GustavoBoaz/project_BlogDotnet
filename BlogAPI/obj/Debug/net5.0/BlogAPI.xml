@@ -160,14 +160,34 @@
                  {
                     "name": "Gustavo Boaz",
                     "email": "gustavo@email.com",
-                    "password": "134652"
-                    
+                    "password": "134652",
+                    "role": "admin"
                  }
             
              </remarks>
              <response code="201">Returns the newly created user</response>
              <response code="400">Error in request</response>
              <response code="401">Exist user email in database</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.Authenticate(BlogAPI.src.DTOs.UserLoginDTO)">
+             <summary>
+             Authenticate user
+             </summary>
+             <param name="user">UserLoginDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 PUT /api/auth
+                 {
+                    "email": "gustavo@email.com",
+                    "password": "134652"
+                 }
+            
+             </remarks>
+             <response code="200">Returns the authorization</response>
+             <response code="400">Error in request</response>
+             <response code="401">User unauthorized</response>
         </member>
         <member name="M:BlogAPI.src.Controllers.UserController.GetUserById(System.Int32)">
             <summary>
@@ -209,8 +229,8 @@
                  PUT /api/user/1
                  {
                     "name": "Gustavo Boaz",
-                    "password": "134652"
-                    
+                    "password": "134652",
+                    "role": "admin"
                  }
             
              </remarks>
@@ -221,6 +241,38 @@
         <member name="T:BlogAPI.src.Data.AppBlogContext">
             <summary>
             <para>Resume: Class responsible for data base Blog context</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.AuthorizationDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting the Authorization data</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserLoginDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting login information</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserRegisterDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a user to register</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserUpdateDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a user to update</para>
             <para>Created by: Gustavo Boaz</para>
             <para>Version: 1.0</para>
             <para>Date: 2022-03-05</para>
@@ -432,22 +484,6 @@
             <para>Date: 2022-03-05</para>
             </summary>
         </member>
-        <member name="T:BlogAPI.src.DTOs.UserRegisterDTO">
-            <summary>
-            <para>Resume: Mirror class responsible for transporting a user to register</para>
-            <para>Created by: Gustavo Boaz</para>
-            <para>Version: 1.0</para>
-            <para>Date: 2022-03-05</para>
-            </summary>
-        </member>
-        <member name="T:BlogAPI.src.DTOs.UserUpdateDTO">
-            <summary>
-            <para>Resume: Mirror class responsible for transporting a user to update</para>
-            <para>Created by: Gustavo Boaz</para>
-            <para>Version: 1.0</para>
-            <para>Date: 2022-03-05</para>
-            </summary>
-        </member>
         <member name="T:BlogAPI.src.Models.PostModel">
             <summary>
             <para>Resume: Class responsible for representing a posts in the database.</para>
@@ -472,6 +508,22 @@
             <para>Date: 2022-03-05</para>
             </summary>
         </member>
+        <member name="T:BlogAPI.src.Services.Implements.TokenService">
+            <summary>
+            <para>Resume: Class responsible for implement enterprise logic of token</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.TokenService.GenerateToken(BlogAPI.src.Models.UserModel)">
+            <summary>
+            <para>Resume: Method responsible for generate token</para>
+            <para>Description: Method claims user email and role and generate token</para>
+            </summary>
+            <param name="user">UserModel</param>
+            <returns>string</returns>
+        </member>
         <member name="T:BlogAPI.src.Services.Implements.UserServices">
             <summary>
             <para>Resume: Class responsible for implement enterprise logic of user</para>
@@ -487,6 +539,14 @@
             </summary>
             <param name="user">UserRegisterDTO</param>
             <returns>UserModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.UserServices.GetAuthorization(BlogAPI.src.DTOs.UserLoginDTO)">
+            <summary>
+            <para>Resume: Method responsible for validate user email and password before authorization</para>
+            <para>Description: Method encodes user password and validate email and password before authorization</para>
+            </summary>
+            <param name="user">UserLoginDTO</param>
+            <returns>AuthorizationDTO</returns>
         </member>
         <member name="M:BlogAPI.src.Services.Implements.UserServices.EncodePassword(System.String)">
             <summary>

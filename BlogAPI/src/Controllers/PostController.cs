@@ -1,6 +1,7 @@
 
 using BlogAPI.src.Models;
 using BlogAPI.src.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="201">Returns the newly created post</response>
         /// <response code="400">Error in request</response>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreatePost([FromBody] PostRegisterDTO post)
@@ -64,6 +66,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns all posts</response>
         /// <response code="204">No content</response>
         [HttpGet("all")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetAllPosts()
@@ -82,6 +85,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the post</response>
         /// <response code="404">Post not found</response>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetPostById([FromRoute] int id)
@@ -100,6 +104,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the posts</response>
         /// <response code="204">No content</response>
         [HttpGet("search")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetPostsByTitle([FromQuery] string title)
@@ -118,6 +123,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Post deleted</response>
         /// <response code="404">Post not found</response>
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletePost([FromRoute] int id)
@@ -150,6 +156,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the updated post</response>
         /// <response code="400">Error in request</response>
         [HttpPut("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdatePost([FromRoute] int id, [FromBody] PostRegisterDTO post)

@@ -3,6 +3,7 @@ using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
 using BlogAPI.src.Repositories;
 using BlogAPI.src.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="400">Error in request</response>
         /// <response code="401">Exist user email in database</response>
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -63,6 +65,39 @@ namespace BlogAPI.src.Controllers
         }
 
         /// <summary>
+        /// Authenticate user
+        /// </summary>
+        /// <param name="user">UserLoginDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/auth
+        ///     {
+        ///        "email": "gustavo@email.com",
+        ///        "password": "134652"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns the authorization</response>
+        /// <response code="400">Error in request</response>
+        /// <response code="401">User unauthorized</response>
+        [HttpPut("/auth")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthorizationDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult Authenticate([FromBody] UserLoginDTO user)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = _userServices.GetAuthorization(user);
+            if (result == null) return Unauthorized();
+
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Get a user by id
         /// </summary>
         /// <param name="id">int</param>
@@ -70,6 +105,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the user</response>
         /// <response code="404">User not found</response>
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin,user")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUserById([FromRoute] int id)
@@ -88,6 +124,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the list users</response>
         /// <response code="204">Users not found</response>
         [HttpGet("search")]
+        [Authorize(Roles = "admin,user")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetUsersByName([FromQuery] string name)
@@ -106,6 +143,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">User deleted</response>
         /// <response code="404">User not found</response>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteUser([FromRoute] int id)
@@ -138,6 +176,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="400">Error in request</response>
         /// <response code="404">User not found</response>
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin,user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -1,6 +1,7 @@
 
 using BlogAPI.src.Models;
 using BlogAPI.src.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="201">Returns the newly created theme</response>
         /// <response code="400">Error in request</response>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateTheme([FromBody] ThemeRegisterDTO theme)
@@ -63,6 +65,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the theme</response>
         /// <response code="404">Theme not found</response>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetThemeById([FromRoute] int id)
@@ -81,6 +84,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the theme</response>
         /// <response code="204">Theme no content</response>
         [HttpGet("search")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetThemesByDescription([FromQuery] string description)
@@ -99,6 +103,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Theme deleted</response>
         /// <response code="404">Theme not found</response>
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteTheme([FromRoute] int id)
@@ -129,6 +134,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="400">Error in request</response>
         /// <response code="404">Theme not found</response>
         [HttpPut("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

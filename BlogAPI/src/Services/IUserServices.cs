@@ -13,5 +13,6 @@ namespace BlogAPI.src.Services
     public interface IUserServices
     {
         UserModel CreateUserNotDuplicated(UserRegisterDTO user);
+        AuthorizationDTO GetAuthorization(UserLoginDTO user);
     }
 }
