@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using BlogAPI.src.Utils;
 
 namespace BlogAPI.src.Models
 {
@@ -32,7 +33,7 @@ namespace BlogAPI.src.Models
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public RoleType Role { get; set; }
 
         [JsonIgnore]
         public List<PostModel> MyPosts { get; set; }

@@ -87,7 +87,7 @@ namespace BlogAPI.src.Services.Implements
         /// </summary>
         /// <param name="password">string</param>
         /// <returns>string</returns>
-        private static string EncodePassword(string password)
+        public static string EncodePassword(string password)
         {
             var bytes = Encoding.UTF8.GetBytes(password);
             return Convert.ToBase64String(bytes);

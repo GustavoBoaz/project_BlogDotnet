@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using BlogAPI.src.Utils;
 
 namespace BlogAPI.src.DTOs
 {
@@ -19,6 +20,6 @@ namespace BlogAPI.src.DTOs
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public RoleType Role { get; set; }
     }
 }

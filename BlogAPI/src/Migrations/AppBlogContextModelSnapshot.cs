@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BlogAPI.src.Migrations
+namespace BlogAPI.Migrations
 {
     [DbContext(typeof(AppBlogContext))]
     partial class AppBlogContextModelSnapshot : ModelSnapshot
@@ -90,9 +90,8 @@ namespace BlogAPI.src.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

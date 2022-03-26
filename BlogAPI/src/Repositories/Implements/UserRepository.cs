@@ -6,6 +6,7 @@ using BlogAPI.src.Data;
 using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
 using Microsoft.EntityFrameworkCore;
+using BlogAPI.src.Services.Implements;
 
 namespace BlogAPI.src.Repositories.Implements
 {
@@ -110,7 +111,7 @@ namespace BlogAPI.src.Repositories.Implements
         {
             var userModel = GetUserById(id);
             userModel.Name = user.Name;
-            userModel.Password = user.Password;
+            userModel.Password = UserServices.EncodePassword(user.Password);
             userModel.Role = user.Role;
             _context.Users.Update(userModel);
             _context.SaveChanges();

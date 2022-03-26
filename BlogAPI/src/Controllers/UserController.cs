@@ -45,7 +45,7 @@ namespace BlogAPI.src.Controllers
         ///        "name": "Gustavo Boaz",
         ///        "email": "gustavo@email.com",
         ///        "password": "134652",
-        ///        "role": "admin"
+        ///        "role": "ADMIN"
         ///     }
         ///
         /// </remarks>
@@ -72,7 +72,7 @@ namespace BlogAPI.src.Controllers
         /// <remarks>
         /// Sample request:
         ///
-        ///     PUT /api/auth
+        ///     PUT /auth
         ///     {
         ///        "email": "gustavo@email.com",
         ///        "password": "134652"
@@ -105,7 +105,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the user</response>
         /// <response code="404">User not found</response>
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "ADMIN,USER")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUserById([FromRoute] int id)
@@ -124,7 +124,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">Returns the list users</response>
         /// <response code="204">Users not found</response>
         [HttpGet("search")]
-        [Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "ADMIN,USER")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult GetUsersByName([FromQuery] string name)
@@ -143,7 +143,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="200">User deleted</response>
         /// <response code="404">User not found</response>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "ADMIN")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteUser([FromRoute] int id)
@@ -168,7 +168,7 @@ namespace BlogAPI.src.Controllers
         ///     {
         ///        "name": "Gustavo Boaz",
         ///        "password": "134652",
-        ///        "role": "admin"
+        ///        "role": "ADMIN"
         ///     }
         ///
         /// </remarks>
@@ -176,7 +176,7 @@ namespace BlogAPI.src.Controllers
         /// <response code="400">Error in request</response>
         /// <response code="404">User not found</response>
         [HttpPut("{id}")]
-        [Authorize(Roles = "admin,user")]
+        [Authorize(Roles = "ADMIN,USER")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

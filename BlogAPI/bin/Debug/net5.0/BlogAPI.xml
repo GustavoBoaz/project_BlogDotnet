@@ -161,7 +161,7 @@
                     "name": "Gustavo Boaz",
                     "email": "gustavo@email.com",
                     "password": "134652",
-                    "role": "admin"
+                    "role": "ADMIN"
                  }
             
              </remarks>
@@ -178,7 +178,7 @@
              <remarks>
              Sample request:
             
-                 PUT /api/auth
+                 PUT /auth
                  {
                     "email": "gustavo@email.com",
                     "password": "134652"
@@ -230,7 +230,7 @@
                  {
                     "name": "Gustavo Boaz",
                     "password": "134652",
-                    "role": "admin"
+                    "role": "ADMIN"
                  }
             
              </remarks>
