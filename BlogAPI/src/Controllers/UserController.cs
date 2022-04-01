@@ -74,7 +74,7 @@ namespace BlogAPI.src.Controllers
         ///
         ///     PUT /auth
         ///     {
-        ///        "email": "gustavo@email.com",
+        ///        "email": "gustavo@domine.com",
         ///        "password": "134652"
         ///     }
         ///
