@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Iie7HspeXhXcXej+s95H3bvOjynWYvWkdunaBV4zoMfNSFYZT6MzQ6AarsNsd3iQDSB4R5koyOnCXmWlvV5c2Q==",
+  "dgSpecHash": "lLDaxBE714p5gjePjfLkULvdzeCE6cRh55n5zYI+2hQ2AhNmq28J/h97ozEi5JAW1o+iLKzwYHowr5dae2jdtw==",
   "success": true,
   "projectFilePath": "C:\\Users\\pamel\\OneDrive\\Área de Trabalho\\boaz\\lenguages\\c#\\Blog\\BlogAPI\\BlogAPI.csproj",
   "expectedPackageFiles": [
@@ -124,7 +124,8 @@
     "C:\\Users\\pamel\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\pamel\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\pamel\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\pamel\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\pamel\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\pamel\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.15\\microsoft.netcore.app.host.win-x64.5.0.15.nupkg.sha512"
   ],
   "logs": []
 }

@@ -5,7 +5,6 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Deb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.runtimeconfig.json
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.runtimeconfig.dev.json
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.dll
-C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\ref\BlogAPI.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.pdb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\BlogAPI.csproj.AssemblyReference.cache
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\BlogAPI.GeneratedMSBuildEditorConfig.editorconfig
@@ -60,3 +59,4 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Deb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\BlogAPI.xml
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\BlogAPI.xml
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPI\obj\Debug\net5.0\refint\BlogAPI.dll

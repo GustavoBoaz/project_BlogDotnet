@@ -71,6 +71,12 @@ namespace BlogAPI
         {
             if (env.IsDevelopment())
             {
+                using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+                {
+                    var context = serviceScope.ServiceProvider.GetRequiredService<AppBlogContext>();
+                    context.Database.EnsureCreated();
+                }
+
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
