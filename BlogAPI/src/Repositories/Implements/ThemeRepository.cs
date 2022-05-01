@@ -37,6 +37,38 @@ namespace BlogAPI.src.Repositories.Implements
         #region IThemeRepository implementation
 
         /// <summary>
+        /// <para>Resume: method for get all themes.</para>
+        /// </summary>
+        /// <returns>List of ThemeModel</returns>
+        public List<ThemeModel> GetAllThemes()
+        {
+            return _context.Themes.ToList();
+        }
+
+        /// <summary>
+        /// <para>Resume: method for get theme by id.</para>
+        /// </summary>
+        /// <param name="id">Id of theme</param>
+        /// <returns>ThemeModel</returns>
+        public ThemeModel GetThemeById(int id)
+        {
+            return _context.Themes
+                        .FirstOrDefault(t => t.Id == id);
+        }
+
+        /// <summary>
+        /// <para>Resume: method for get theme by description.</para>
+        /// </summary>
+        /// <param name="description">Description of theme</param>
+        /// <returns>List of ThemeModel</returns>
+        public List<ThemeModel> GetThemeByDescription(string description)
+        {
+            return _context.Themes
+                        .Where(t => t.Description.Contains(description))
+                        .ToList();
+        }
+
+        /// <summary>
         /// <para>Resume: method for add a new theme.</para>
         /// </summary>
         /// <param name="theme">ThemeRegisterDTO</param>
@@ -50,50 +82,24 @@ namespace BlogAPI.src.Repositories.Implements
         }
 
         /// <summary>
+        /// <para>Resume: Implement method for update a theme.</para>
+        /// </summary>
+        /// <param name="theme">ThemeUpdateDTO</param>
+        public void UpdateTheme(ThemeUpdateDTO theme)
+        {
+            var themeUpdate = GetThemeById(theme.Id);
+            themeUpdate.Description = theme.Description;
+            _context.Themes.Update(themeUpdate);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
         /// <para>Resume: method for delete a theme.</para>
         /// </summary>
         /// <param name="id">Id of theme</param>
         public void DeleteTheme(int id)
         {
             _context.Themes.Remove(GetThemeById(id));
-            _context.SaveChanges();
-        }
-
-        /// <summary>
-        /// <para>Resume: method for get theme by description.</para>
-        /// </summary>
-        /// <param name="description">Description of theme</param>
-        /// <returns>List of ThemeModel</returns>
-        public List<ThemeModel> GetThemeByDescription(string description)
-        {
-            return _context.Themes
-                        .Include(t => t.Posts)
-                        .Where(t => t.Description.Contains(description))
-                        .ToList();
-        }
-
-        /// <summary>
-        /// <para>Resume: method for get theme by id.</para>
-        /// </summary>
-        /// <param name="id">Id of theme</param>
-        /// <returns>ThemeModel</returns>
-        public ThemeModel GetThemeById(int id)
-        {
-            return _context.Themes
-                        .Include(t => t.Posts)
-                        .FirstOrDefault(t => t.Id == id);
-        }
-
-        /// <summary>
-        /// <para>Resume: Implement method for update a theme.</para>
-        /// </summary>
-        /// <param name="theme">ThemeUpdateDTO</param>
-        /// <param name="id">Int</param>
-        public void UpdateTheme(int id, ThemeUpdateDTO theme)
-        {
-            var themeUpdate = GetThemeById(id);
-            themeUpdate.Description = theme.Description;
-            _context.Themes.Update(themeUpdate);
             _context.SaveChanges();
         }
 

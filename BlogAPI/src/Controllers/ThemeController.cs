@@ -30,31 +30,21 @@ namespace BlogAPI.src.Controllers
         #region Methods
 
         /// <summary>
-        /// Create a new theme
+        /// Get all themes
         /// </summary>
-        /// <param name="theme">ThemeRegisterDTO</param>
         /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /api/theme
-        ///     {
-        ///        "description": "Gustavo Boaz"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="201">Returns the newly created theme</response>
-        /// <response code="400">Error in request</response>
-        [HttpPost]
+        /// <response code="200">Returns all themes</response>
+        /// <response code="204">No content</response>
+        [HttpGet("all")]
         [Authorize]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ThemeModel))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult CreateTheme([FromBody] ThemeRegisterDTO theme)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ThemeModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult GetAllThemes()
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var themes = _themeRepository.GetAllThemes();
+            if (themes.Count < 1) return NoContent();
 
-            _themeRepository.AddTheme(theme);
-            return Created("", theme);
+            return Ok(themes);
         }
 
         /// <summary>
@@ -96,6 +86,67 @@ namespace BlogAPI.src.Controllers
         }
 
         /// <summary>
+        /// Create a new theme
+        /// </summary>
+        /// <param name="theme">ThemeRegisterDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Theme
+        ///     {
+        ///        "description": "C#"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns the newly created theme</response>
+        /// <response code="400">Error in request</response>
+        [HttpPost]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ThemeModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreateTheme([FromBody] ThemeRegisterDTO theme)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            _themeRepository.AddTheme(theme);
+            return Created("", theme);
+        }
+
+        /// <summary>
+        /// Update theme by id
+        /// </summary>
+        /// <param name="theme">ThemeRegisterDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/Theme
+        ///     {
+        ///        "description": "Python"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Theme updated</response>
+        /// <response code="400">Error in request</response>
+        /// <response code="404">Theme not found</response>
+        [HttpPut]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateTheme([FromBody] ThemeUpdateDTO theme)
+        {
+            var themeModel = _themeRepository.GetThemeById(theme.Id);
+            if (themeModel == null) return NotFound();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            _themeRepository.UpdateTheme(theme);
+            return Ok();
+        }
+
+        /// <summary>
         /// Delete theme by id
         /// </summary>
         /// <param name="id">int</param>
@@ -112,40 +163,6 @@ namespace BlogAPI.src.Controllers
             if (theme == null) return NotFound();
 
             _themeRepository.DeleteTheme(id);
-            return Ok();
-        }
-
-        /// <summary>
-        /// Update theme by id
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <param name="theme">ThemeRegisterDTO</param>
-        /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     PUT /api/theme/1
-        ///     {
-        ///        "description": "Gustavo Boaz"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Theme updated</response>
-        /// <response code="400">Error in request</response>
-        /// <response code="404">Theme not found</response>
-        [HttpPut("{id}")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateTheme([FromRoute] int id, [FromBody] ThemeUpdateDTO theme)
-        {
-            var themeModel = _themeRepository.GetThemeById(id);
-            if (themeModel == null) return NotFound();
-
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            _themeRepository.UpdateTheme(id, theme);
             return Ok();
         }
 

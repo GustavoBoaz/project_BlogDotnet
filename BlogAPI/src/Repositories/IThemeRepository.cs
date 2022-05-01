@@ -12,10 +12,11 @@ namespace BlogAPI.src.Repositories
     /// </summary>
     public interface IThemeRepository
     {
+        List<ThemeModel> GetAllThemes();
         ThemeModel GetThemeById(int id);
         List<ThemeModel> GetThemeByDescription(string description);
         void AddTheme(ThemeRegisterDTO theme);
-        void UpdateTheme(int id, ThemeUpdateDTO theme);
+        void UpdateTheme(ThemeUpdateDTO theme);
         void DeleteTheme(int id);
     }
 }

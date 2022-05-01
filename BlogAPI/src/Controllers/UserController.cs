@@ -33,38 +33,6 @@ namespace BlogAPI.src.Controllers
         #region Methods
 
         /// <summary>
-        /// Create a new user
-        /// </summary>
-        /// <param name="user">UserRegisterDTO</param>
-        /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /api/user
-        ///     {
-        ///        "name": "Gustavo Boaz",
-        ///        "email": "gustavo@email.com",
-        ///        "password": "134652",
-        ///        "role": "ADMIN"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="201">Returns the newly created user</response>
-        /// <response code="400">Error in request</response>
-        /// <response code="401">Exist user email in database</response>
-        [HttpPost]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserModel))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public IActionResult CreateUser([FromBody] UserRegisterDTO user)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            return _userServices.CreateUserNotDuplicated(user) == null ? Unauthorized() : Created("", user);
-        }
-
-        /// <summary>
         /// Authenticate user
         /// </summary>
         /// <param name="user">UserLoginDTO</param>
@@ -74,7 +42,7 @@ namespace BlogAPI.src.Controllers
         ///
         ///     PUT /auth
         ///     {
-        ///        "email": "gustavo@domine.com",
+        ///        "email": "gustavo@domain.com",
         ///        "password": "134652"
         ///     }
         ///
@@ -136,6 +104,76 @@ namespace BlogAPI.src.Controllers
         }
 
         /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="user">UserRegisterDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/User
+        ///     {
+        ///        "name": "Gustavo Boaz",
+        ///        "email": "gustavo@domain.com",
+        ///        "password": "134652",
+        ///        "photo": "URLPHOTO",
+        ///        "role": "ADMIN"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns the newly created user</response>
+        /// <response code="400">Error in request</response>
+        /// <response code="401">Exist user email in database</response>
+        [HttpPost]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public IActionResult CreateUser([FromBody] UserRegisterDTO user)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            return _userServices.CreateUserNotDuplicated(user) == null ? Unauthorized() : Created("", user);
+        }
+
+        /// <summary>
+        /// Update a user
+        /// </summary>
+        /// <param name="user">UserUpdateDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/User
+        ///     {
+        ///        "id": 1,    
+        ///        "name": "Gustavo Boaz",
+        ///        "password": "134652",
+        ///        "photo": "URLPHOTO"
+        ///        "role": "ADMIN"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">User updated</response>
+        /// <response code="400">Error in request</response>
+        /// <response code="404">User not found</response>
+        [HttpPut]
+        [Authorize(Roles = "ADMIN,USER")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateUser([FromBody] UserUpdateDTO user)
+        {
+            var userModel = _userRepository.GetUserById(user.Id);
+            if (userModel == null) return NotFound();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            _userRepository.UpdateUser(user);
+            return Ok();
+        }
+
+        /// <summary>
         /// Delete a user by id
         /// </summary>
         /// <param name="id">int</param>
@@ -152,42 +190,6 @@ namespace BlogAPI.src.Controllers
             if (user == null) return NotFound();
 
             _userRepository.DeleteUser(id);
-            return Ok();
-        }
-
-        /// <summary>
-        /// Update a user by id
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <param name="user">UserUpdateDTO</param>
-        /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     PUT /api/user/1
-        ///     {
-        ///        "name": "Gustavo Boaz",
-        ///        "password": "134652",
-        ///        "role": "ADMIN"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">User updated</response>
-        /// <response code="400">Error in request</response>
-        /// <response code="404">User not found</response>
-        [HttpPut("{id}")]
-        [Authorize(Roles = "ADMIN,USER")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult UpdateUser([FromRoute] int id, [FromBody] UserUpdateDTO user)
-        {
-            var userModel = _userRepository.GetUserById(id);
-            if (userModel == null) return NotFound();
-
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            _userRepository.UpdateUser(id, user);
             return Ok();
         }
 

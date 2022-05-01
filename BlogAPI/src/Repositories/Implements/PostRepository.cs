@@ -33,6 +33,18 @@ namespace BlogAPI.src.Repositories.Implements
         #region IPostRepository implementation
 
         /// <summary>
+        /// <para>Resume: method for get all posts.</para>
+        /// </summary>
+        /// <returns>List of PostModel</returns>
+        public List<PostModel> GetAllPosts()
+        {
+            return _context.Posts
+                        .Include(p => p.RelatedTheme)
+                        .Include(p => p.Creator)
+                        .ToList();
+        }
+
+        /// <summary>
         /// <para>Resume: method for get post by id.</para>
         /// </summary>
         /// <param name="id">Id of post</param>
@@ -40,35 +52,74 @@ namespace BlogAPI.src.Repositories.Implements
         public PostModel GetPostById(int id)
         {
             return _context.Posts
-                        .Include(p => p.Theme)
-                        .Include(p => p.User)
+                        .Include(p => p.RelatedTheme)
+                        .Include(p => p.Creator)
                         .FirstOrDefault(p => p.Id == id);
         }
 
         /// <summary>
-        /// <para>Resume: method for get all posts.</para>
-        /// </summary>
-        /// <returns>List of PostModel</returns>
-        public List<PostModel> GetAllPosts()
-        {
-            return _context.Posts
-                        .Include(p => p.Theme)
-                        .Include(p => p.User)
-                        .ToList();
-        }
-
-        /// <summary>
-        /// <para>Resume: method for get posts by title.</para>
+        /// <para>Resume: Query method for get posts by title or description theme and name creator</para>
         /// </summary>
         /// <param name="title">Title of post</param>
+        /// <param name="descriptionTheme">Theme of post</param>
+        /// <param name="nameCreator">Creator of post</param>
         /// <returns>List of PostModel</returns>
-        public List<PostModel> GetPostByTitle(string title)
+        public List<PostModel> GetPostsBySearch(string title, string descriptionTheme, string nameCreator)
         {
-            return _context.Posts
-                        .Include(p => p.Theme)
-                        .Include(p => p.User)
-                        .Where(p => p.Title.Contains(title))
-                        .ToList();
+            switch (title, descriptionTheme, nameCreator)
+            {
+                case (null, null, null):
+                    return GetAllPosts();
+
+                case (null, null, _):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Creator.Name.Contains(nameCreator))
+                            .ToList();
+
+                case (null, _, null):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Description.Contains(descriptionTheme))
+                            .ToList();
+
+                case (_, null, null):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Title.Contains(title))
+                            .ToList();
+
+                case (_, _, null):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Title.Contains(title) & p.Description.Contains(descriptionTheme))
+                            .ToList();
+
+                case (null, _, _):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Description.Contains(descriptionTheme) & p.Creator.Name.Contains(nameCreator))
+                            .ToList();
+
+                case (_, null, _):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Title.Contains(title) & p.Creator.Name.Contains(nameCreator))
+                            .ToList();
+
+                case (_, _, _):
+                    return _context.Posts
+                            .Include(p => p.RelatedTheme)
+                            .Include(p => p.Creator)
+                            .Where(p => p.Title.Contains(title) | p.Description.Contains(descriptionTheme) | p.Creator.Name.Contains(nameCreator))
+                            .ToList();
+            }
         }
 
         /// <summary>
@@ -79,19 +130,60 @@ namespace BlogAPI.src.Repositories.Implements
         public PostModel AddPost(PostRegisterDTO post)
         {
             var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme);
-            var existentUser = _context.Users.FirstOrDefault(u => u.Email == post.EmailUser);
+            var existentUser = _context.Users.FirstOrDefault(u => u.Email == post.EmailCreator);
 
-            if (existentTheme == null || existentUser == null) return null;
+            if (existentTheme == null)
+            {
+                _context.Themes.Add(new ThemeModel
+                {
+                    Description = post.DescriptionTheme
+                });
+                _context.SaveChanges();
+            }
+
+            if (existentUser == null) return null;
 
             var newPost = _context.Posts.Add(new PostModel
             {
                 Title = post.Title,
                 Description = post.Description,
-                Theme = existentTheme,
-                User = existentUser
+                Photo = post.Photo,
+                RelatedTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme),
+                Creator = existentUser
             }).Entity;
             _context.SaveChanges();
             return newPost;
+        }
+
+        /// <summary>
+        /// <para>Resume: method for update existent post.</para>
+        /// </summary>
+        /// <param name="post">PostUpdateDTO</param>
+        /// <returns>PostModel</returns>
+        public PostModel UpdatePost(PostUpdateDTO post)
+        {
+            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
+            var postToUpdate = GetPostById(post.Id);
+
+            if (existentTheme == null)
+            {
+                _context.Themes.Add(new ThemeModel
+                {
+                    Description = post.DescritionTheme
+                });
+                _context.SaveChanges();
+            }
+
+            if (postToUpdate == null) return null;
+
+            postToUpdate.Title = post.Title;
+            postToUpdate.Description = post.Description;
+            postToUpdate.Photo = post.Photo;
+            postToUpdate.RelatedTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescritionTheme);
+
+            _context.Posts.Update(postToUpdate);
+            _context.SaveChanges();
+            return postToUpdate;
         }
 
         /// <summary>
@@ -102,30 +194,6 @@ namespace BlogAPI.src.Repositories.Implements
         {
             _context.Posts.Remove(GetPostById(id));
             _context.SaveChanges();
-        }
-
-        /// <summary>
-        /// <para>Resume: method for update existent post.</para>
-        /// </summary>
-        /// <param name="post">PostUpdateDTO</param>
-        /// <param name="id">Id of post</param>
-        /// <returns>PostModel</returns>
-        public PostModel UpdatePost(int id, PostRegisterDTO post)
-        {
-            var existentTheme = _context.Themes.FirstOrDefault(t => t.Description == post.DescriptionTheme);
-            var existentUser = _context.Users.FirstOrDefault(u => u.Email == post.EmailUser);
-            var postToUpdate = GetPostById(id);
-
-            if (existentTheme == null || existentUser == null || postToUpdate == null) return null;
-
-            postToUpdate.Title = post.Title;
-            postToUpdate.Description = post.Description;
-            postToUpdate.Theme = existentTheme;
-            postToUpdate.User = existentUser;
-
-            _context.Posts.Update(postToUpdate);
-            _context.SaveChanges();
-            return postToUpdate;
         }
 
         #endregion IPostRepository implementation

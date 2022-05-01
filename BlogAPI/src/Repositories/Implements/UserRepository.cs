@@ -40,6 +40,40 @@ namespace BlogAPI.src.Repositories.Implements
         #region IUserRepository implementation
 
         /// <summary>
+        /// <para>Resume: method for get user by id.</para>
+        /// </summary>
+        /// <param name="id">Id of user</param>
+        /// <returns>UserModel</returns>
+        public UserModel GetUserById(int id)
+        {
+            return _context.Users
+                        .FirstOrDefault(u => u.Id == id);
+        }
+
+        /// <summary>
+        /// <para>Resume: method for get user by name.</para>
+        /// </summary>
+        /// <param name="name">Name of user</param>
+        /// <returns>List of UserModel</returns>
+        public List<UserModel> GetUserByName(string name)
+        {
+            return _context.Users
+                        .Where(u => u.Name.Contains(name))
+                        .ToList();
+        }
+
+        /// <summary>
+        /// <para>Resume: method for get user by email.</para>
+        /// </summary>
+        /// <param name="email">Email of user</param>
+        /// <returns>UserModel</returns>
+        public UserModel GetUserByEmail(string email)
+        {
+            return _context.Users
+                        .FirstOrDefault(u => u.Email == email);
+        }
+
+        /// <summary>
         /// <para>Resume: method for add a new user.</para>
         /// </summary>
         /// <param name="user">UserRegisterDTO</param>
@@ -48,10 +82,26 @@ namespace BlogAPI.src.Repositories.Implements
             _context.Users.Add(new UserModel
             {
                 Name = user.Name,
-                Password = user.Password,
                 Email = user.Email,
+                Password = user.Password,
+                Photo = user.Photo,
                 Role = user.Role
             });
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// <para>Resume: method for update am existent user.</para>
+        /// </summary>
+        /// <param name="user">UserUpdateDTO</param>
+        public void UpdateUser(UserUpdateDTO user)
+        {
+            var userModel = GetUserById(user.Id);
+            userModel.Name = user.Name;
+            userModel.Password = UserServices.EncodePassword(user.Password);
+            userModel.Photo = user.Photo;
+            userModel.Role = user.Role;
+            _context.Users.Update(userModel);
             _context.SaveChanges();
         }
 
@@ -65,58 +115,6 @@ namespace BlogAPI.src.Repositories.Implements
             _context.SaveChanges();
         }
 
-        /// <summary>
-        /// <para>Resume: method for get user by email.</para>
-        /// </summary>
-        /// <param name="email">Email of user</param>
-        /// <returns>UserModel</returns>
-        public UserModel GetUserByEmail(string email)
-        {
-            return _context.Users
-                        .Include(u => u.MyPosts)
-                        .FirstOrDefault(u => u.Email == email);
-        }
-
-        /// <summary>
-        /// <para>Resume: method for get user by id.</para>
-        /// </summary>
-        /// <param name="id">Id of user</param>
-        /// <returns>UserModel</returns>
-        public UserModel GetUserById(int id)
-        {
-            return _context.Users
-                        .Include(u => u.MyPosts)
-                        .FirstOrDefault(u => u.Id == id);
-        }
-
-        /// <summary>
-        /// <para>Resume: method for get user by name.</para>
-        /// </summary>
-        /// <param name="name">Name of user</param>
-        /// <returns>List of UserModel</returns>
-        public List<UserModel> GetUserByName(string name)
-        {
-            return _context.Users
-                        .Include(u => u.MyPosts)
-                        .Where(u => u.Name.Contains(name))
-                        .ToList();
-        }
-
-        /// <summary>
-        /// <para>Resume: method for update am existent user.</para>
-        /// </summary>
-        /// <param name="id">Id of user</param>
-        /// <param name="user">UserUpdateDTO</param>
-        public void UpdateUser(int id, UserUpdateDTO user)
-        {
-            var userModel = GetUserById(id);
-            userModel.Name = user.Name;
-            userModel.Password = UserServices.EncodePassword(user.Password);
-            userModel.Role = user.Role;
-            _context.Users.Update(userModel);
-            _context.SaveChanges();
-        }
+        #endregion IUserRepository implementation
     }
-
-    #endregion IUserRepository implementation
 }

@@ -15,9 +15,9 @@ namespace BlogAPI.src.Repositories
     {
         PostModel GetPostById(int id);
         List<PostModel> GetAllPosts();
-        List<PostModel> GetPostByTitle(string title);
+        List<PostModel> GetPostsBySearch(string title, string descriptionTheme, string nameCreator);
         PostModel AddPost(PostRegisterDTO post);
-        PostModel UpdatePost(int id, PostRegisterDTO post);
+        PostModel UpdatePost(PostUpdateDTO post);
         void DeletePost(int id);
     }
 }

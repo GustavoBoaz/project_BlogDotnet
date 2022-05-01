@@ -73,13 +73,13 @@ namespace BlogAPI.src.Services.Implements
             if (userExists.Password != EncodePassword(user.Password)) return null;
 
             return new AuthorizationDTO
-            {
-                Id = userExists.Id,
-                Name = userExists.Name,
-                Email = userExists.Email,
-                Role = userExists.Role,
-                Token = TokenService.GenerateToken(userExists)
-            };
+            (
+                userExists.Id,
+                userExists.Name,
+                userExists.Email,
+                userExists.Role,
+                TokenService.GenerateToken(userExists)
+            );
         }
 
         /// <summary>

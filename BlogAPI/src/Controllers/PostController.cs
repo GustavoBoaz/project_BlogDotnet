@@ -30,36 +30,6 @@ namespace BlogAPI.src.Controllers
         #region Methods
 
         /// <summary>
-        /// Create a new post
-        /// </summary>
-        /// <param name="post">PostRegisterDTO</param>
-        /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /api/post
-        ///     {
-        ///        "title": "C# in 2022",
-        ///        "description": "C# in 2022 is the future of programming",
-        ///        "descriptionTheme": "Languages",
-        ///        "emailUser": "gustavo@email.com"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="201">Returns the newly created post</response>
-        /// <response code="400">Error in request</response>
-        [HttpPost]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostModel))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult CreatePost([FromBody] PostRegisterDTO post)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            return _postRepository.AddPost(post) == null ? BadRequest() : Created("", post);
-        }
-
-        /// <summary>
         /// Get all posts
         /// </summary>
         /// <returns>IActionResult</returns>
@@ -97,9 +67,11 @@ namespace BlogAPI.src.Controllers
         }
 
         /// <summary>
-        /// Get posts by title
+        /// Get posts by title or description theme or name creator
         /// </summary>
         /// <param name="title">string</param>
+        /// <param name="descriptionTheme">string</param>
+        /// <param name="nameCreator">string</param>
         /// <returns>IActionResult</returns>
         /// <response code="200">Returns the posts</response>
         /// <response code="204">No content</response>
@@ -107,12 +79,76 @@ namespace BlogAPI.src.Controllers
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GetPostsByTitle([FromQuery] string title)
+        public IActionResult GetPostsBySearch(
+            [FromQuery] string title,
+            [FromQuery] string descriptionTheme,
+            [FromQuery] string nameCreator)
         {
-            var posts = _postRepository.GetPostByTitle(title);
+            var posts = _postRepository.GetPostsBySearch(title, descriptionTheme, nameCreator);
             if (posts.Count < 1) return NoContent();
 
             return Ok(posts);
+        }
+
+        /// <summary>
+        /// Create a new post
+        /// </summary>
+        /// <param name="post">PostRegisterDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Post
+        ///     {
+        ///        "title": "C# in 2022",
+        ///        "description": "C# in 2022 is the future of programming",
+        ///        "photo": "URLPHOTO",
+        ///        "descriptionTheme": "C#",
+        ///        "emailCreator": "gustavo@domain.com"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns the newly created post</response>
+        /// <response code="400">Error in request</response>
+        [HttpPost]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(PostModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreatePost([FromBody] PostRegisterDTO post)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            return _postRepository.AddPost(post) == null ? BadRequest() : Created("", post);
+        }
+
+        /// <summary>
+        /// Update post
+        /// </summary>
+        /// <param name="post">PostRegisterDTO</param>
+        /// <returns>IActionResult</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /api/Post
+        ///     {
+        ///        "title": "C# in 2022",
+        ///        "description": "C# in 2022 is the future of programming",
+        ///        "descriptionTheme": "C#",
+        ///        "emailUser": "gustavo@email.com"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns the updated post</response>
+        /// <response code="400">Error in request</response>
+        [HttpPut]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdatePost([FromBody] PostUpdateDTO post)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            return _postRepository.UpdatePost(post) == null ? BadRequest() : Ok(post);
         }
 
         /// <summary>
@@ -133,37 +169,6 @@ namespace BlogAPI.src.Controllers
 
             _postRepository.DeletePost(id);
             return Ok();
-        }
-
-        /// <summary>
-        /// Update post by id
-        /// </summary>
-        /// <param name="id">int</param>
-        /// <param name="post">PostRegisterDTO</param>
-        /// <returns>IActionResult</returns>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     PUT /api/post/1
-        ///     {
-        ///        "title": "C# in 2022",
-        ///        "description": "C# in 2022 is the future of programming",
-        ///        "descriptionTheme": "Languages",
-        ///        "emailUser": "gustavo@email.com"
-        ///     }
-        ///
-        /// </remarks>
-        /// <response code="200">Returns the updated post</response>
-        /// <response code="400">Error in request</response>
-        [HttpPut("{id}")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostModel))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdatePost([FromRoute] int id, [FromBody] PostRegisterDTO post)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            return _postRepository.UpdatePost(id, post) == null ? BadRequest() : Ok(post);
         }
 
         #endregion Methods

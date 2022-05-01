@@ -16,18 +16,19 @@ namespace BlogAPI.src.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(30)]
+        [Required, StringLength(30)]
         public string Title { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required, StringLength(200)]
         public string Description { get; set; }
 
-        [ForeignKey("ThemeId")]
-        public ThemeModel Theme { get; set; }
+        [StringLength(200)]
+        public string Photo { get; set; }
 
-        [ForeignKey("UserId")]
-        public UserModel User { get; set; }
+        [ForeignKey("FK_Theme")]
+        public ThemeModel RelatedTheme { get; set; }
+
+        [ForeignKey("FK_User")]
+        public UserModel Creator { get; set; }
     }
 }

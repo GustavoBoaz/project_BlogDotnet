@@ -13,10 +13,10 @@ namespace BlogAPI.src.Repositories
     public interface IUserRepository
     {
         UserModel GetUserById(int id);
-        UserModel GetUserByEmail(string email);
         List<UserModel> GetUserByName(string name);
+        UserModel GetUserByEmail(string email);
         void AddUser(UserRegisterDTO user);
-        void UpdateUser(int id, UserUpdateDTO user);
+        void UpdateUser(UserUpdateDTO user);
         void DeleteUser(int id);
     }
 }
