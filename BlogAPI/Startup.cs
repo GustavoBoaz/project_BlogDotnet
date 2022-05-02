@@ -113,6 +113,11 @@ namespace BlogAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
             }
 
+            context.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1"));
+
             app.UseRouting();
 
             app.UseCors(x => x

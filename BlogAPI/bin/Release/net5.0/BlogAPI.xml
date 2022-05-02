@@ -1,0 +1,583 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlogAPI</name>
+    </assembly>
+    <members>
+        <member name="M:BlogAPI.src.Controllers.PostController.GetAllPosts">
+            <summary>
+            Get all posts
+            </summary>
+            <returns>IActionResult</returns>
+            <response code="200">Returns all posts</response>
+            <response code="204">No content</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.PostController.GetPostById(System.Int32)">
+            <summary>
+            Get post by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the post</response>
+            <response code="404">Post not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.PostController.GetPostsBySearch(System.String,System.String,System.String)">
+            <summary>
+            Get posts by title or description theme or name creator
+            </summary>
+            <param name="title">string</param>
+            <param name="descriptionTheme">string</param>
+            <param name="nameCreator">string</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the posts</response>
+            <response code="204">No content</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.PostController.CreatePost(BlogAPI.src.Repositories.PostRegisterDTO)">
+             <summary>
+             Create a new post
+             </summary>
+             <param name="post">PostRegisterDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 POST /api/Post
+                 {
+                    "title": "C# in 2022",
+                    "description": "C# in 2022 is the future of programming",
+                    "photo": "URLPHOTO",
+                    "descriptionTheme": "C#",
+                    "emailCreator": "gustavo@domain.com"
+                 }
+            
+             </remarks>
+             <response code="201">Returns the newly created post</response>
+             <response code="400">Error in request</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.PostController.UpdatePost(BlogAPI.src.Repositories.PostUpdateDTO)">
+             <summary>
+             Update post
+             </summary>
+             <param name="post">PostRegisterDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 PUT /api/Post
+                 {
+                    "title": "C# in 2022",
+                    "description": "C# in 2022 is the future of programming",
+                    "descriptionTheme": "C#",
+                    "emailUser": "gustavo@email.com"
+                 }
+            
+             </remarks>
+             <response code="200">Returns the updated post</response>
+             <response code="400">Error in request</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.PostController.DeletePost(System.Int32)">
+            <summary>
+            Delete post by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">Post deleted</response>
+            <response code="404">Post not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.GetAllThemes">
+            <summary>
+            Get all themes
+            </summary>
+            <returns>IActionResult</returns>
+            <response code="200">Returns all themes</response>
+            <response code="204">No content</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.GetThemeById(System.Int32)">
+            <summary>
+            Get theme by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the theme</response>
+            <response code="404">Theme not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.GetThemesByDescription(System.String)">
+            <summary>
+            Get themes by description
+            </summary>
+            <param name="description">string</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the theme</response>
+            <response code="204">Theme no content</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.CreateTheme(BlogAPI.src.Repositories.ThemeRegisterDTO)">
+             <summary>
+             Create a new theme
+             </summary>
+             <param name="theme">ThemeRegisterDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 POST /api/Theme
+                 {
+                    "description": "C#"
+                 }
+            
+             </remarks>
+             <response code="201">Returns the newly created theme</response>
+             <response code="400">Error in request</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.UpdateTheme(BlogAPI.src.Repositories.ThemeUpdateDTO)">
+             <summary>
+             Update theme by id
+             </summary>
+             <param name="theme">ThemeRegisterDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 PUT /api/Theme
+                 {
+                    "description": "Python"
+                 }
+            
+             </remarks>
+             <response code="200">Theme updated</response>
+             <response code="400">Error in request</response>
+             <response code="404">Theme not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.ThemeController.DeleteTheme(System.Int32)">
+            <summary>
+            Delete theme by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">Theme deleted</response>
+            <response code="404">Theme not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.Authenticate(BlogAPI.src.DTOs.UserLoginDTO)">
+             <summary>
+             Authenticate user
+             </summary>
+             <param name="user">UserLoginDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 PUT /auth
+                 {
+                    "email": "gustavo@domain.com",
+                    "password": "134652"
+                 }
+            
+             </remarks>
+             <response code="200">Returns the authorization</response>
+             <response code="400">Error in request</response>
+             <response code="401">User unauthorized</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.GetUserById(System.Int32)">
+            <summary>
+            Get a user by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the user</response>
+            <response code="404">User not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.GetUsersByName(System.String)">
+            <summary>
+            Get a users by name
+            </summary>
+            <param name="name">string</param>
+            <returns>IActionResult</returns>
+            <response code="200">Returns the list users</response>
+            <response code="204">Users not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.CreateUser(BlogAPI.src.DTOs.UserRegisterDTO)">
+             <summary>
+             Create a new user
+             </summary>
+             <param name="user">UserRegisterDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 POST /api/User
+                 {
+                    "name": "Gustavo Boaz",
+                    "email": "gustavo@domain.com",
+                    "password": "134652",
+                    "photo": "URLPHOTO",
+                    "role": "ADMIN"
+                 }
+            
+             </remarks>
+             <response code="201">Returns the newly created user</response>
+             <response code="400">Error in request</response>
+             <response code="401">Exist user email in database</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.UpdateUser(BlogAPI.src.DTOs.UserUpdateDTO)">
+             <summary>
+             Update a user
+             </summary>
+             <param name="user">UserUpdateDTO</param>
+             <returns>IActionResult</returns>
+             <remarks>
+             Sample request:
+            
+                 PUT /api/User
+                 {
+                    "id": 1,    
+                    "name": "Gustavo Boaz",
+                    "password": "134652",
+                    "photo": "URLPHOTO"
+                    "role": "ADMIN"
+                 }
+            
+             </remarks>
+             <response code="200">User updated</response>
+             <response code="400">Error in request</response>
+             <response code="404">User not found</response>
+        </member>
+        <member name="M:BlogAPI.src.Controllers.UserController.DeleteUser(System.Int32)">
+            <summary>
+            Delete a user by id
+            </summary>
+            <param name="id">int</param>
+            <returns>IActionResult</returns>
+            <response code="200">User deleted</response>
+            <response code="404">User not found</response>
+        </member>
+        <member name="T:BlogAPI.src.Data.AppBlogContext">
+            <summary>
+            <para>Resume: Class responsible for data base Blog context</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserLoginDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting login information</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.AuthorizationDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting the Authorization data</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserRegisterDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a user to register</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.DTOs.UserUpdateDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a user to update</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.PostRegisterDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a post to register</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.PostUpdateDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a post to update</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.ThemeRegisterDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a theme to register</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.ThemeUpdateDTO">
+            <summary>
+            <para>Resume: Mirror class responsible for transporting a theme to update</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.Implements.PostRepository">
+            <summary>
+            <para>Resume: Class responsible for implement methos CRUD Post.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.GetAllPosts">
+            <summary>
+            <para>Resume: method for get all posts.</para>
+            </summary>
+            <returns>List of PostModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.GetPostById(System.Int32)">
+            <summary>
+            <para>Resume: method for get post by id.</para>
+            </summary>
+            <param name="id">Id of post</param>
+            <returns>PostModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.GetPostsBySearch(System.String,System.String,System.String)">
+            <summary>
+            <para>Resume: Query method for get posts by title or description theme and name creator</para>
+            </summary>
+            <param name="title">Title of post</param>
+            <param name="descriptionTheme">Theme of post</param>
+            <param name="nameCreator">Creator of post</param>
+            <returns>List of PostModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.AddPost(BlogAPI.src.Repositories.PostRegisterDTO)">
+            <summary>
+            <para>Resume: method for add new post.</para>
+            </summary>
+            <param name="post">PostRegisterDTO</param>
+            <returns>PostModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.UpdatePost(BlogAPI.src.Repositories.PostUpdateDTO)">
+            <summary>
+            <para>Resume: method for update existent post.</para>
+            </summary>
+            <param name="post">PostUpdateDTO</param>
+            <returns>PostModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.PostRepository.DeletePost(System.Int32)">
+            <summary>
+            <para>Resume: method for delete existent post.</para>
+            </summary>
+            <param name="id">Id of post</param>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.Implements.ThemeRepository">
+            <summary>
+            <para>Resume: Class responsible for implement methos CRUD Theme.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.#ctor(BlogAPI.src.Data.AppBlogContext)">
+            <summary>
+            <para>Resume: Constructor of class.</para>
+            </summary>
+            <param name="context">AppBlogContext</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.GetAllThemes">
+            <summary>
+            <para>Resume: method for get all themes.</para>
+            </summary>
+            <returns>List of ThemeModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.GetThemeById(System.Int32)">
+            <summary>
+            <para>Resume: method for get theme by id.</para>
+            </summary>
+            <param name="id">Id of theme</param>
+            <returns>ThemeModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.GetThemeByDescription(System.String)">
+            <summary>
+            <para>Resume: method for get theme by description.</para>
+            </summary>
+            <param name="description">Description of theme</param>
+            <returns>List of ThemeModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.AddTheme(BlogAPI.src.Repositories.ThemeRegisterDTO)">
+            <summary>
+            <para>Resume: method for add a new theme.</para>
+            </summary>
+            <param name="theme">ThemeRegisterDTO</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.UpdateTheme(BlogAPI.src.Repositories.ThemeUpdateDTO)">
+            <summary>
+            <para>Resume: Implement method for update a theme.</para>
+            </summary>
+            <param name="theme">ThemeUpdateDTO</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.ThemeRepository.DeleteTheme(System.Int32)">
+            <summary>
+            <para>Resume: method for delete a theme.</para>
+            </summary>
+            <param name="id">Id of theme</param>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.Implements.UserRepository">
+            <summary>
+            <para>Resume: Class responsible for implement methos CRUD Users.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.#ctor(BlogAPI.src.Data.AppBlogContext)">
+            <summary>
+            <para>Resume: Constructor of class.</para>
+            </summary>
+            <param name="context">AppBlogContext</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.GetUserById(System.Int32)">
+            <summary>
+            <para>Resume: method for get user by id.</para>
+            </summary>
+            <param name="id">Id of user</param>
+            <returns>UserModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.GetUserByName(System.String)">
+            <summary>
+            <para>Resume: method for get user by name.</para>
+            </summary>
+            <param name="name">Name of user</param>
+            <returns>List of UserModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.GetUserByEmail(System.String)">
+            <summary>
+            <para>Resume: method for get user by email.</para>
+            </summary>
+            <param name="email">Email of user</param>
+            <returns>UserModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.AddUser(BlogAPI.src.DTOs.UserRegisterDTO)">
+            <summary>
+            <para>Resume: method for add a new user.</para>
+            </summary>
+            <param name="user">UserRegisterDTO</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.UpdateUser(BlogAPI.src.DTOs.UserUpdateDTO)">
+            <summary>
+            <para>Resume: method for update am existent user.</para>
+            </summary>
+            <param name="user">UserUpdateDTO</param>
+        </member>
+        <member name="M:BlogAPI.src.Repositories.Implements.UserRepository.DeleteUser(System.Int32)">
+            <summary>
+            <para>Resume: method for delete a existent user.</para>
+            </summary>
+            <param name="id">Id of user</param>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.IPostRepository">
+            <summary>
+            <para>Resume: Interface responsible for representing CRUD actions posts.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.IThemeRepository">
+            <summary>
+            <para>Resume: Interface responsible for representing CRUD actions themes.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Repositories.IUserRepository">
+            <summary>
+            <para>Resume: Interface responsible for representing CRUD actions users.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Models.PostModel">
+            <summary>
+            <para>Resume: Class responsible for representing a posts in the database.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Models.ThemeModel">
+            <summary>
+            <para>Resume: Class responsible for representing a themes in the database.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Models.UserModel">
+            <summary>
+            <para>Resume: Class responsible for representing a users in the database.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="T:BlogAPI.src.Services.Implements.TokenService">
+            <summary>
+            <para>Resume: Class responsible for implement enterprise logic of token</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-17</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.TokenService.GenerateToken(BlogAPI.src.Models.UserModel)">
+            <summary>
+            <para>Resume: Method responsible for generate token</para>
+            <para>Description: Method claims user email and role and generate token</para>
+            </summary>
+            <param name="user">UserModel</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:BlogAPI.src.Services.Implements.UserServices">
+            <summary>
+            <para>Resume: Class responsible for implement enterprise logic of user</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-05</para>
+            </summary>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.UserServices.CreateUserNotDuplicated(BlogAPI.src.DTOs.UserRegisterDTO)">
+            <summary>
+            <para>Resume: Method responsible for validate user email exist before creation</para>
+            <para>Description: Method encodes user password and validate email before save in database</para>
+            </summary>
+            <param name="user">UserRegisterDTO</param>
+            <returns>UserModel</returns>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.UserServices.GetAuthorization(BlogAPI.src.DTOs.UserLoginDTO)">
+            <summary>
+            <para>Resume: Method responsible for validate user email and password before authorization</para>
+            <para>Description: Method encodes user password and validate email and password before authorization</para>
+            </summary>
+            <param name="user">UserLoginDTO</param>
+            <returns>AuthorizationDTO</returns>
+        </member>
+        <member name="M:BlogAPI.src.Services.Implements.UserServices.EncodePassword(System.String)">
+            <summary>
+            <para>Resume: Method responsible for encode user password</para>
+            </summary>
+            <param name="password">string</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:BlogAPI.src.Services.IUserServices">
+            <summary>
+            <para>Resume: Interface responsible for enterprise logic of user service.</para>
+            <para>Created by: Gustavo Boaz</para>
+            <para>Version: 1.0</para>
+            <para>Date: 2022-03-06</para>
+            </summary>
+        </member>
+    </members>
+</doc>
