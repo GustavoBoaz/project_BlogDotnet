@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
 
 namespace BlogAPI.src.Repositories

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BlogAPI.src.Data;
+using BlogAPI.src.DTOs;
 using BlogAPI.src.Models;
 using Microsoft.EntityFrameworkCore;
 

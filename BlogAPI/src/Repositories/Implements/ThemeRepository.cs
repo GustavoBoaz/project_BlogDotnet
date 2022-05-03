@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BlogAPI.src.Data;
 using BlogAPI.src.Models;
 using Microsoft.EntityFrameworkCore;
+using BlogAPI.src.DTOs;
 
 namespace BlogAPI.src.Repositories.Implements
 {
