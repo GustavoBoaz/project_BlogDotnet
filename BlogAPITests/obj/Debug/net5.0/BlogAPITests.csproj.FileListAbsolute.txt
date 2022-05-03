@@ -9,7 +9,6 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bi
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\BlogAPITests.runtimeconfig.json
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\BlogAPITests.runtimeconfig.dev.json
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\BlogAPITests.dll
-C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\ref\BlogAPITests.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\BlogAPITests.pdb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\bin\Debug\net5.0\Microsoft.TestPlatform.CoreUtilities.dll
@@ -97,3 +96,4 @@ C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\ob
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\obj\Debug\net5.0\ref\BlogAPITests.dll
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\obj\Debug\net5.0\BlogAPITests.pdb
 C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\obj\Debug\net5.0\BlogAPITests.genruntimeconfig.cache
+C:\Users\pamel\OneDrive\Área de Trabalho\boaz\lenguages\c#\Blog\BlogAPITests\obj\Debug\net5.0\refint\BlogAPITests.dll

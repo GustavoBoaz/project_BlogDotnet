@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BlogAPI.src.Repositories
+namespace BlogAPI.src.DTOs
 {
     /// <summary>
     /// <para>Resume: Mirror class responsible for transporting a post to register</para>
